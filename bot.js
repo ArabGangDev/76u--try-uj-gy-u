@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.on('ready', () => {
     client.user.setActivity('BH TEAM | Beta', { type: 'WATCHING' });
-  console.log('Im Ready');
+  console.log('Im Ready v1');
 });
 
 var Prefix = ".";
