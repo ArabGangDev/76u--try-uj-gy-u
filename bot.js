@@ -92,4 +92,4 @@ client.on("message", message => {
 
      
 });
-client.login(token);//By Zy4d
+client.login(process.env.BOT_TOKEN);//By Zy4d
