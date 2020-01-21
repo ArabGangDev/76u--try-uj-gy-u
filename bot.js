@@ -67,6 +67,21 @@ client.on('message', msg => {
     msg.reply('تم تسجيل خروجك بنجاح ✅');
   }
 });
+client.on('message', msg => {
+  if (msg.content == 'رابط') {
+    msg.reply('الرابط الرسمي لسيرفر الثقب الاسود👉 https://discord.gg/EMAetr9');
+  }
+});
+client.on('message', msg => {
+  if (msg.content == 'ip') {
+    msg.reply('👷السيرفر قيد التطوير');
+  }
+});
+client.on('message', msg => {
+  if (msg.content == 'Ip') {
+    msg.reply('👷السيرفر قيد التطوير');
+  }
+});
 client.on('message', message => {
     if (message.content === ".avatar") {
     message.reply(message.author.avatarURL); 
