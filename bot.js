@@ -92,4 +92,4 @@ client.on("message", message => {
 
      
 });
-client.login("");//By Zy4d
+client.login(token);//By Zy4d
