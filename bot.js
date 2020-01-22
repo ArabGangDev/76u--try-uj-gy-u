@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.on('ready', () => {
     client.user.setActivity('BH TEAM | Beta', { type: 'WATCHING' });
-  console.log('Im Ready v1');
+  console.log('Im Ready v1.1');
 });
 
 var Prefix = ".";
@@ -69,7 +69,7 @@ client.on('message', msg => {
 });
 client.on('message', msg => {
   if (msg.content == 'رابط') {
-    msg.reply('الرابط الرسمي لسيرفر الثقب الاسود👉 https://discord.gg/EMAetr9');
+    msg.reply('الرابط الرسمي لسيرفر الثقب الاسود👈 https://discord.gg/EMAetr9');
   }
 });
 client.on('message', msg => {
