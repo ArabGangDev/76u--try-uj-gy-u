@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.on('ready', () => {
     client.user.setActivity('BH TEAM | Beta', { type: 'WATCHING' });
-  console.log('Im Ready v1.1');
+  console.log('Im Ready v0.5');
 });
 
 var Prefix = ".";
@@ -80,6 +80,11 @@ client.on('message', msg => {
 client.on('message', msg => {
   if (msg.content == 'Ip') {
     msg.reply('👷السيرفر قيد التطوير');
+  }
+});
+client.on('message', msg => {
+  if (msg.content == '.version') {
+    msg.reply('Black Hole Bot Version: 0.5 BETA');
   }
 });
 client.on('message', message => {
