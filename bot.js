@@ -113,6 +113,7 @@ client.on("message", (message) => {
                 READ_MESSAGES: true
             });
             message.channel.send(`:white_check_mark: **تم إنشاء تذكرتك ، #${c.name}.**`);
+			message.delete(6000);
             const embed = new Discord.RichEmbed()
                 .setColor(0xCF40FA)
                 .addField(`مرحباّ ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون فريق الدعم لدينا قريبا للمساعدة.`)
@@ -125,7 +126,7 @@ client.on("message", (message) => {
  
  
   if (message.content.startsWith("BHclose")) {
-        if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+        if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`لا يمكنك استخدام الأمر خارج التذكرة`);
  
         message.channel.send(`هل أنت متأكد؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء!\n للتأكيد ، اكتب\`.confirm\`. سيؤدي ذلك إلى مهلة زمنية في غضون 10 ثوانٍ وإلغائها`)
             .then((m) => {
@@ -166,4 +167,4 @@ client.on("message", message => {
 
      
 });
-client.login(process.env.);//By Zy4d
+client.login("process.env.BOT_TOKEN");//By Zy4d
