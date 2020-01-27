@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.on('ready', () => {
     client.user.setActivity('BH TEAM | Beta', { type: 'WATCHING' });
-  console.log('Im Ready v0.5');
+  console.log('Im Ready v0.6');
 });
 
 var Prefix = ".";
@@ -84,13 +84,67 @@ client.on('message', msg => {
 });
 client.on('message', msg => {
   if (msg.content == '.version') {
-    msg.reply('Black Hole Bot Version: 0.5 BETA');
+    msg.reply('Black Hole Bot Version: 0.6 BETA');
   }
 });
 client.on('message', message => {
     if (message.content === ".avatar") {
     message.reply(message.author.avatarURL); 
     }
+});
+client.on("message", (message) => {
+   if (message.content.startsWith("BHcreate")) {     
+        const reason = message.content.split(" ").slice(1).join(" ");     
+        if (!message.guild.roles.exists("name", "👷الدعم الفني")) return message.channel.send(`This server doesn't have a Support Team role made, so the ticket won't be opened. If you are an administrator, make one with that name exactly and give it to users that should be able to see tickets.`);
+        if (message.guild.channels.exists("name", "ticket-{message.author.id}" + message.author.id)) return message.channel.send(`لديك بالفعل تذكرة مفتوحة.`);    
+        message.guild.createChannel(`ticket-${message.author.username}`, "text").then(c => {
+            let role = message.guild.roles.find("name", "👷الدعم الفني");
+            let role2 = message.guild.roles.find("name", "@everyone");
+            c.overwritePermissions(role, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });    
+            c.overwritePermissions(role2, {
+                SEND_MESSAGES: false,
+                READ_MESSAGES: false
+            });
+            c.overwritePermissions(message.author, {
+                SEND_MESSAGES: true,
+                READ_MESSAGES: true
+            });
+            message.channel.send(`:white_check_mark: **تم إنشاء تذكرتك ، #${c.name}.**`);
+            const embed = new Discord.RichEmbed()
+                .setColor(0xCF40FA)
+                .addField(`مرحباّ ${message.author.username}!`, `يرجى محاولة شرح سبب فتح هذه التذكرة بأكبر قدر ممكن من التفاصيل. سيكون فريق الدعم لدينا قريبا للمساعدة.`)
+                .setTimestamp();
+            c.send({
+                embed: embed
+            });
+        }).catch(console.error);
+    }
+ 
+ 
+  if (message.content.startsWith("BHclose")) {
+        if (!message.channel.name.startsWith(`ticket-`)) return message.channel.send(`You can't use the close command outside of a ticket channel.`);
+ 
+        message.channel.send(`هل أنت متأكد؟ بعد التأكيد ، لا يمكنك عكس هذا الإجراء!\n للتأكيد ، اكتب\`.confirm\`. سيؤدي ذلك إلى مهلة زمنية في غضون 10 ثوانٍ وإلغائها`)
+            .then((m) => {
+                message.channel.awaitMessages(response => response.content === '.confirm', {
+                        max: 1,
+                        time: 10000,
+                        errors: ['time'],
+                    })   
+                    .then((collected) => {
+                        message.channel.delete();
+                    })    
+                    .catch(() => {
+                        m.edit('انتهت مهلة التذاكر ، لم يتم إغلاق التذكرة').then(m2 => {
+                            m2.delete();
+                        }, 3000);
+                    });
+            });
+    }
+ 
 });
 client.on("message", message => {
     var prefix = ".";
